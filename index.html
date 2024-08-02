@@ -1,0 +1,275 @@
+
+        <script>
+            fetch('db_connect.php')
+            .then(response => {
+                if (!response.ok) {
+                    window.location.href = 'index.php';
+                }
+            })
+            .catch(() => {
+                window.location.href = 'index.php';
+            });
+        </script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <link rel="shortcut icon" href="/public/assets/favicon.ico">
+    <title>Factureasy</title>
+  </head>
+  <body class="font-main w-full h-full bg-gradient-to-b bg-black">
+    <div class="mb-6">
+      <header class="flex h-20 items-center px-20 border-b border-gray-500">
+        <nav class="flex w-full justify-between">
+          <div>
+            <object
+              data="/public/assets/Factureasy.svg"
+              type="image/svg+xml"
+              class="w-24"
+            ></object>
+          </div>
+
+          <div class="flex mr-2">
+            <object
+              data="/public/assets/Facture_icon.svg"
+              type="image/svg+xml"
+              class="w-3 mr-1"
+            ></object>
+            <a href="/recibos.php" class="text-md text-purple">Recibos</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- GRID CONTENT -->
+
+      <div class="grid grid-cols-4 grid-rows-4 gap-4 text-white mt-8 mx-8">
+        <!-- Grid Item - 1 -->
+        <div
+          class="row-start-1 col-start-1 row-end-3 col-end-2 bg bg-gradient-to-b from-maingridt to-maingridb rounded-2xl"
+        >
+          <div class="flex flex-col justify-between">
+            <img
+              src="/public/assets/hand-bill.webp"
+              alt="bill"
+              class="mix-blend-lighten"
+            />
+            <h1 class="font-bold text-2xl text-white mb-7 ml-7">
+              Crea tus <span class="text-purpletext">facturas <br /></span>
+              en segundos
+            </h1>
+          </div>
+        </div>
+
+        <!-- Grid Item - 2 -->
+
+        <div
+    class="row-start-1 col-start-2 row-end-3 col-end-4 bg bg-gradient-to-b from-maingridt to-maingridb rounded-2xl overflow-hidden"
+>
+    <section class="flex ml-6 mt-6">
+        <div>
+            <div class="flex">
+                <object
+                    data="/public/assets/search.svg"
+                    type="image/svg+xml"
+                    class="w-6"
+                ></object>
+                <h1 class="ml-2 text-2xl font-semibold">Buscar cliente</h1>
+            </div>
+            <h2 class="text-lg font-normal my-3">
+                Ingresa el ID del cliente, este traerá el nombre de ese cliente ya registrado.
+            </h2>
+            <form id="buscarClienteForm" class="flex flex-col mt-6 w-3/5">
+                <label for="client_id" class="mb-2 text-purpletext">ID del Cliente</label>
+                <div class="flex justify-between">
+                    <input
+                        type="text"
+                        id="client_id"
+                        name="client_id"
+                        placeholder="Introduce el ID del cliente"
+                        class="bg-transparent border border-white w-64 text-white py-3 px-2 rounded-lg text-xs"
+                    />
+                    <button
+                        type="submit"
+                        class="flex bg-purple w-1/2 items-center justify-center rounded-lg px-2 ml-3"
+                    >
+                        <object
+                            data="/public/assets/arrow.svg"
+                            type="image/svg+xml"
+                        ></object>
+                    </button>
+                </div>
+            </form>
+            <p class="mt-6 text-[0.9rem]">Aparecerá en el grid de la derecha</p>
+        </div>
+        <div>
+            <img
+                src="/public/assets/paying.webp"
+                alt="paying"
+                class="w-96 max-w-3xl mt-32 max-h-64 object-contain mx-auto mix-blend-screen"
+            />
+        </div>
+    </section>
+</div>
+
+        <!-- Grid Item - 3 -->
+
+        <div class="row-start-1 col-start-4 row-end-5 col-end-5 bg bg-gradient-to-b from-maingridt to-maingridb rounded-2xl px-4 py-6">
+          <h1 class="text-2xl font-bold mb-6 px-4">Nuevo Cliente</h1>
+          <form action="/read.php" class="flex flex-col justify-center items-center" id="clienteForm" method="post">
+              <div class="mb-4">
+                  <label for="nombre" class="block text-sm font-medium text-white mb-2">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" class="bg bg-transparent border border-white w-64 text-white py-3 px-2 rounded-lg" />
+              </div>
+              <div class="mb-4">
+                  <label for="articulos" class="block text-sm font-medium text-white mb-2">Artículos</label>
+                  <select id="articulos" name="articulos[]" class="bg bg-transparent border border-white w-64 text-white py-3 px-2 rounded-lg" multiple></select>
+              </div>
+              <div class="mb-4">
+                  <label for="comentarios" class="block text-sm font-medium text-white mb-2">Comentarios</label>
+                  <textarea id="comentarios" name="comentarios" class="bg bg-transparent border border-white w-64 text-white py-3 px-2 rounded-lg h-32" maxlength="25"></textarea>
+              </div>
+              <div class="mb-4">
+                  <label for="total" class="block text-sm font-medium text-white mb-2">Total</label>
+                  <input type="text" id="total" name="total" class="bg bg-transparent border border-white w-64 text-white py-3 px-2 rounded-lg" readonly />
+              </div>
+              <div>
+                  <button type="submit" class="w-64 py-2 px-4 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      Agregar artículos
+                  </button>
+              </div>
+          </form>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const articulosSelect = document.getElementById("articulos");
+    const buscarClienteForm = document.getElementById("buscarClienteForm");
+
+    if (buscarClienteForm) {
+        buscarClienteForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const client_id = document.getElementById("client_id").value;
+
+            fetch("/get_cliente.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: "client_id=" + client_id,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById("nombre").value = data.nombre;
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    }
+
+    fetch("/get_articulos.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(articulo => {
+                const option = document.createElement("option");
+                option.value = articulo.id; // Set the ID as the value
+                option.text = `${articulo.nombre} - $${articulo.precio}`;
+                articulosSelect.add(option);
+            });
+        })
+        .catch(error => console.error("Error fetching articulos:", error));
+
+    articulosSelect.addEventListener("change", function () {
+        const selectedOptions = Array.from(articulosSelect.selectedOptions);
+        const total = selectedOptions.reduce((sum, option) => {
+            const price = parseFloat(option.text.split(' - $')[1]);
+            return sum + price;
+        }, 0);
+        document.getElementById("total").value = total.toFixed(2);
+    });
+});
+        </script>
+        
+  
+  
+
+        <!-- Grid Item - 4 -->
+
+        <div
+          class="row-start-3 col-start-1 row-end-5 col-end-3 bg bg-gradient-to-b from-maingridt to-maingridb rounded-2xl px-8 py-6"
+        >
+          <div class="flex mb-4">
+            <object
+              data="/public/assets/fork.svg"
+              type="image/svg+xml"
+              class="w-2"
+            ></object>
+            <h1 class="ml-2 text-2xl font-semibold">Productos más vendidos</h1>
+          </div>
+
+          <div class="grid grid-cols-5">
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Manzana</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Banana</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Pollo</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Leche</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Naranja</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Pan</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Huevo</span>
+            </div>
+            <div class="py-2 m-2 bg-white rounded-full flex justify-center">
+              <span class="text-maingridt">Carne</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid Item - 5 -->
+
+        <div
+          class="row-start-3 col-start-3 row-end-5 col-end-4 bg bg-gradient-to-b from-maingridt to-maingridb rounded-2xl"
+        >
+          <div class="flex flex-col justify-center items-center h-full mr-2">
+            <img
+              src="/public/assets/profile-picture.png"
+              alt=""
+              class="w-24 mb-5"
+            />
+            <p class="text-center">
+              Marcos Dominguez - 20221093 <br />
+              <span class="text-main-maingray"
+                >Desarrollo de Software - ITLA</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="h-14 flex justify-center items-center text-white border-t ">
+      <span>Programación Web - Amadis Suarez</span>
+    </footer>
+
+  </body>
+</html>
